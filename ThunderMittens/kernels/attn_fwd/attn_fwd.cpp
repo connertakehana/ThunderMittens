@@ -41,8 +41,8 @@ array attn_fwd(
     assert(q.dtype() == bfloat16 && k.dtype() == bfloat16 && k.dtype() == bfloat16);
     assert(q.shape() == k.shape() && k.shape() == v.shape());
 
-    const int B = q.shape(0); 
-    const int H = q.shape(1); 
+    const int B = q.shape(0);
+    const int H = q.shape(1);
     const int N = q.shape(2);
     const int D = q.shape(3);
     
@@ -140,12 +140,27 @@ void AttnFwd::eval_gpu(
   // We get the needed metal device using the stream
   auto& d = metal::device(s.device);
 
+//   // Prepare to specialize based on contiguity
+//   bool contiguous_kernel =
+//       (x.flags().row_contiguous && y.flags().row_contiguous) ||
+//       (x.flags().col_contiguous && y.flags().col_contiguous);
+
+//   if (contiguous_kernel) {
+//     out.set_data(
+//         allocator::malloc_or_wait(x.data_size() * out.itemsize()),
+//         x.data_size(),
+//         x.strides(),
+//         x.flags());
+//   } else {
+//     out.set_data(allocator::malloc_or_wait(out.nbytes()));
+//   }
+
   out.set_data(allocator::malloc_or_wait(out.nbytes()));
   // Resolve name of kernel (corresponds to axpby.metal)
   std::ostringstream kname;
-  const int B = q.shape(0); 
-  const int H = q.shape(1);  
-  const int N = q.shape(2);    
+  const int B = q.shape(0);
+  const int H = q.shape(1);
+  const int N = q.shape(2);
   const int D = q.shape(3);
   kname << "attn_fwd_";
   kname << std::to_string(D);
@@ -170,16 +185,32 @@ void AttnFwd::eval_gpu(
   compute_encoder.set_input_array(k, 1);
   compute_encoder.set_input_array(v, 2);
   compute_encoder.set_output_array(out, 3);
-  compute_encoder.set_bytes(H, 4);
-  compute_encoder.set_bytes(N, 5);
+//  compute_encoder.set_bytes(H, 4);
+//  compute_encoder.set_bytes(N, 5);
+    compute_encoder.set_bytes(N, 4);
+    compute_encoder.set_bytes(H, 5);
+
 
   MTL::Size group_dims = MTL::Size(32, 1, 1);
+
   
   MTL::Size grid_dims = MTL::Size(N / 8, H, B);
 
+  // Launch the grid with the given number of threads divided among
+  // the given threadgroups
   compute_encoder.dispatch_threadgroups(grid_dims, group_dims);
 }
 
+// #else // Metal is not available
+
+// /** Fail evaluation on GPU */
+// void Axpby::eval_gpu(
+//     const std::vector<array>& inputs,
+//     std::vector<array>& out) {
+//   throw std::runtime_error("Axpby has no GPU implementation.");
+// }
+
+// #endif
 
 ///////////////////////////////////////////////////////////////////////////////
 // Primitive Transforms
@@ -190,6 +221,24 @@ std::vector<array> AttnFwd::jvp(
     const std::vector<array>& primals,
     const std::vector<array>& tangents,
     const std::vector<int>& argnums) {
+//   // Forward mode diff that pushes along the tangents
+//   // The jvp transform on the primitive can built with ops
+//   // that are scheduled on the same stream as the primitive
+
+//   // If argnums = {0}, we only push along x in which case the
+//   // jvp is just the tangent scaled by alpha
+//   // Similarly, if argnums = {1}, the jvp is just the tangent
+//   // scaled by beta
+//   if (argnums.size() > 1) {
+//     auto scale = argnums[0] == 0 ? alpha_ : beta_;
+//     auto scale_arr = array(scale, tangents[0].dtype());
+//     return {multiply(scale_arr, tangents[0], stream())};
+//   }
+//   // If, argnums = {0, 1}, we take contributions from both
+//   // which gives us jvp = tangent_x * alpha + tangent_y * beta
+//   else {
+//     return {axpby(tangents[0], tangents[1], alpha_, beta_, stream())};
+//   }
     throw std::runtime_error("AttnFwd has no jvp implementation.");
 }
 
@@ -224,3 +273,4 @@ bool AttnFwd::is_equivalent(const Primitive& other) const {
 }
 
 } // namespace mlx::core
+

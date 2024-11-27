@@ -25,7 +25,9 @@ def run_mlx_iterations(q, k, v,itt):
 
 def run_tk_iterations(q, k, v, itt):
     for _ in range(itt):
-        mx.eval(attn_fwd(q, k, v))
+        mx.eval(mx.fast.scaled_dot_product_attention(
+            q, k, v, scale=1, mask=None
+        ))
     toi = time.perf_counter()
     for _ in range(itt):
         mx.eval(attn_fwd(q, k, v))
@@ -35,7 +37,6 @@ def run_tk_iterations(q, k, v, itt):
 
 
 def benchmark_sdpa(q: mx.array, k: mx.array, v: mx.array, itt):
-    # mx.eval(q, k, v)
     mlx_tpi = run_mlx_iterations(q, k, v, itt)
 
     gflops_mlx = calculate_flops(q.shape[0], q.shape[1], q.shape[2], q.shape[3]) / (mlx_tpi / 1000)
@@ -47,15 +48,14 @@ def benchmark_sdpa(q: mx.array, k: mx.array, v: mx.array, itt):
     print(f"diff: {gflops_tk / gflops_mlx*100}%")
     print("---")
 
-for D in [128]:
-    for N in [1024*1]:
-        q = mx.random.uniform(shape=(16, 16, N, D)).astype(mx.float16)
-        k = mx.random.uniform(shape=(16, 16, N, D)).astype(mx.float16)
-        v = mx.random.uniform(shape=(16, 16, N, D)).astype(mx.float16)
+for D in [64, 128]:
+    for N in [512*1, 512*2, 512*3, 512*4, 512*5]:
+        q = mx.random.uniform(shape=(16, 16, N, D)).astype(mx.bfloat16)
+        k = mx.random.uniform(shape=(16, 16, N, D)).astype(mx.bfloat16)
+        v = mx.random.uniform(shape=(16, 16, N, D)).astype(mx.bfloat16)
         itt = 50
-        o = attn_fwd(q, k, v, stream=mx.gpu)
         for i in range(5):
             mx.metal.clear_cache()
             print(f"running: ({q.shape[0]} x {q.shape[1]} x {q.shape[2]} x {q.shape[3]}), {itt} warmups, {itt} benchmarked")
-            benchmark_sdpa(q, k, v, itt) 
+            benchmark_sdpa(q, k, v, itt)
     print("------------------------------------------------------------------------------")

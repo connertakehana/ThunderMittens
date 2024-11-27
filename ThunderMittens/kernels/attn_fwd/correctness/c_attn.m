@@ -129,43 +129,6 @@ double launch_kernel(id<MTLDevice> device, id<MTLCommandQueue> command_queue,
     
     return GET_TIME;
 }
-double launch_kernel2(id<MTLDevice> device, id<MTLCommandQueue> command_queue,
-                            id<MTLBuffer> q, id<MTLBuffer> k, id<MTLBuffer> v, id<MTLBuffer> o_res,
-                            NSString* kernel_name,
-                            int B, int H, int N, int D) {
-    INIT_TIMER
-    NSError *error;
-    id<MTLCommandBuffer> command_buffer = [command_queue commandBuffer];
-    assert(command_buffer != nil);
-    id<MTLComputeCommandEncoder> compute_encoder = [command_buffer computeCommandEncoder];
-    assert(compute_encoder != nil);
-    id<MTLLibrary> default_library = [device newDefaultLibrary];
-    assert(default_library != nil);
-    id<MTLFunction> kernel = [default_library newFunctionWithName:kernel_name];
-    assert(kernel != nil);
-    id<MTLComputePipelineState> kernelPSO = [device newComputePipelineStateWithFunction:kernel error:&error];
-    assert(kernelPSO != nil);
-
-    MTLSize threadgroup_size = MTLSizeMake(32, 2, 2);
-    MTLSize grid = MTLSizeMake(N / 16, H, B);
-
-    [compute_encoder setComputePipelineState:kernelPSO];
-    [compute_encoder setBytes:&N length:sizeof(unsigned) atIndex:0];
-    [compute_encoder setBytes:&H length:sizeof(unsigned) atIndex:1];
-    [compute_encoder setBuffer:q offset:0 atIndex:2];
-    [compute_encoder setBuffer:k offset:0 atIndex:3];
-    [compute_encoder setBuffer:v offset:0 atIndex:4];
-    [compute_encoder setBuffer:o_res offset:0 atIndex:5];
-    
-    [compute_encoder dispatchThreadgroups:grid threadsPerThreadgroup:threadgroup_size];
-    [compute_encoder endEncoding];
-    START_TIMER
-    [command_buffer commit];
-    [command_buffer waitUntilCompleted];
-    END_TIMER
-    
-    return GET_TIME;
-}
 
 void check_attn_correctness(id<MTLBuffer> _o_ref, id<MTLBuffer> _o_res, int B, int H, int N, int D) {
     const float epsilon = 5e-2;

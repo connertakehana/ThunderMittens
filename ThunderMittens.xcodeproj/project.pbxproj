@@ -608,7 +608,11 @@
 					"$(PROJECT_DIR)/ThunderMittens/kernels/tk",
 					"$(PROJECT_DIR)/ThunderMittens/mlx/python/mlx/lib",
 				);
+				MTL_COMPILER_FLAGS = "";
+				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_HEADER_SEARCH_PATHS = "$(SRCROOT)/ThunderMittens/include";
+				MTL_MATH_FP32_FUNCTIONS = FAST;
+				MTL_MATH_MODE = FAST;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -625,7 +629,10 @@
 					"$(PROJECT_DIR)/ThunderMittens/kernels/tk",
 					"$(PROJECT_DIR)/ThunderMittens/mlx/python/mlx/lib",
 				);
+				MTL_COMPILER_FLAGS = "";
 				MTL_HEADER_SEARCH_PATHS = "$(SRCROOT)/ThunderMittens/include";
+				MTL_MATH_FP32_FUNCTIONS = FAST;
+				MTL_MATH_MODE = FAST;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
