@@ -1,10 +1,8 @@
 ThunderMittens/tests/unit/outputs/
 
 ThunderMittens/kernels/tk/
-ThunderMittens/include/
-ThunderMittens/kernels/
-ThunderMittens/mlx/
-ThunderMittens/tests/
+
+
 # MLX provided:
 # Byte-compiled / optimized / DLL files
 __pycache__/
