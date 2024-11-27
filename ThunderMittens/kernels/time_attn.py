@@ -54,7 +54,7 @@ for D in [64, 128]:
         k = mx.random.uniform(shape=(16, 16, N, D)).astype(mx.bfloat16)
         v = mx.random.uniform(shape=(16, 16, N, D)).astype(mx.bfloat16)
         itt = 50
-        for i in range(5):
+        for i in range(1):
             mx.metal.clear_cache()
             print(f"running: ({q.shape[0]} x {q.shape[1]} x {q.shape[2]} x {q.shape[3]}), {itt} warmups, {itt} benchmarked")
             benchmark_sdpa(q, k, v, itt)
