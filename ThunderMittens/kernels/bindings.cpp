@@ -3,8 +3,6 @@
 #include <nanobind/nanobind.h>
 #include <nanobind/stl/variant.h>
 
-#include "axpby/axpby.h"
-#include "add_custom/add_custom.h"
 #include "add_rt/add_rt.h"
 #include "attn_fwd/attn_fwd.h"
 #include "matmul_custom/matmul_custom.h"
