@@ -119,7 +119,6 @@
 				kernels/attn_fwd/attn_fwd.cpp,
 				kernels/bindings.cpp,
 				kernels/matmul_custom/matmul_custom.cpp,
-				kernels/tk/libmlx_ext.dylib,
 				mlx/benchmarks/cpp/autograd.cpp,
 				mlx/benchmarks/cpp/compare_devices.cpp,
 				mlx/benchmarks/cpp/irregular_strides.cpp,
