@@ -1,3 +1,4 @@
+#define RUN_ATTN_OBJ_C
 #ifdef RUN_ATTN_OBJ_C
 
 #pragma once
@@ -36,6 +37,8 @@
     [captureManager stopCapture];
 #import <Foundation/Foundation.h>
 #import <Metal/Metal.h>
+
+
 
 bfloat16_t floatToBfloat16(float input) {
     uint32_t floatBits = *((uint32_t*)&input);
@@ -169,7 +172,8 @@ void check_attn_correctness(id<MTLBuffer> _o_ref, id<MTLBuffer> _o_res, int B, i
     NSError *error = nil;
     bfloat16_t* o_ref = [_o_ref contents];
     bfloat16_t* o_res = [_o_res contents];
-//    float avg_diff
+    NSString *currentPath = [[NSFileManager defaultManager] currentDirectoryPath];
+    NSString* basePath = [NSString stringWithFormat:@"%@/ThunderMittens/kernels/attn_fwd/correctness/", currentPath];
     for (int b = 0; b < B; b++) {
     for (int h = 0; h < H; h++) {
     for (int n = 0; n < N; n++) {
@@ -198,7 +202,8 @@ void check_attn_correctness(id<MTLBuffer> _o_ref, id<MTLBuffer> _o_res, int B, i
                 }
                 [log1 appendString: @"\n"];
             }
-            [log1 writeToFile:@"/Users/connertakehana/Desktop/SwiftProjects/metalThundermittens/metalThundermittens/kernels/attn/diff.txt" atomically:YES encoding:NSUTF8StringEncoding error:&error];
+            NSString* diffPath = [NSString stringWithFormat:@"%@diff.txt", basePath];
+            [log1 writeToFile:diffPath atomically:YES encoding:NSUTF8StringEncoding error:&error];
             avg_diff /= (N * D);
             
             NSMutableString* log2 = [NSMutableString stringWithString:@""];
@@ -211,7 +216,8 @@ void check_attn_correctness(id<MTLBuffer> _o_ref, id<MTLBuffer> _o_res, int B, i
                 }
                 [log2 appendString: @"\n"];
             }
-            [log2 writeToFile:@"/Users/connertakehana/Desktop/SwiftProjects/metalThundermittens/metalThundermittens/kernels/attn/ref.txt" atomically:YES encoding:NSUTF8StringEncoding error:&error];
+            NSString* refPath = [NSString stringWithFormat:@"%@ref.txt", basePath];
+            [log2 writeToFile:refPath atomically:YES encoding:NSUTF8StringEncoding error:&error];
             avg_ref /= (N * D);
             float avg_res = 0.f;
             NSMutableString* log3 = [NSMutableString stringWithString:@""];
@@ -223,7 +229,8 @@ void check_attn_correctness(id<MTLBuffer> _o_ref, id<MTLBuffer> _o_res, int B, i
                 }
                 [log3 appendString: @"\n"];
             }
-            [log3 writeToFile:@"/Users/connertakehana/Desktop/SwiftProjects/metalThundermittens/metalThundermittens/kernels/attn/res.txt" atomically:YES encoding:NSUTF8StringEncoding error:&error];
+            NSString* resPath = [NSString stringWithFormat:@"%@res.txt", basePath];
+            [log3 writeToFile:resPath atomically:YES encoding:NSUTF8StringEncoding error:&error];
             avg_res /= (N * D);
             
             NSLog(@"avg diff magnitude  : %.5f\n"
@@ -231,7 +238,7 @@ void check_attn_correctness(id<MTLBuffer> _o_ref, id<MTLBuffer> _o_res, int B, i
                   @"avg res  magnitude  : %.5f\n",
                   avg_diff, avg_ref, avg_res);
             return;
-//            assert(false);
+            assert(false);
         }
     }
     }
@@ -243,8 +250,11 @@ void check_attn_correctness(id<MTLBuffer> _o_ref, id<MTLBuffer> _o_res, int B, i
 
 
 
-NSString *filePath = @"/Users/connertakehana/Desktop/SwiftProjects/ThunderMittens/ThunderMittens/kernels/attn_fwd/correctness/randn_4_4_1024_128.txt";
+
 int main(int argc, const char * argv[]) {
+    NSString *currentPath = [[NSFileManager defaultManager] currentDirectoryPath];
+    NSString *filePath = [NSString stringWithFormat:@"%@/ThunderMittens/kernels/attn_fwd/correctness/randn_4_4_1024_128.txt", currentPath];
+    NSLog(@"%@", filePath);
     @autoreleasepool {
         id<MTLDevice> device = MTLCreateSystemDefaultDevice();
         id<MTLCommandQueue> command_queue = [device newCommandQueue];
@@ -311,75 +321,4 @@ int main(int argc, const char * argv[]) {
     }
     return 0;
 }
-
-/*
- 16 x 16 x 512 x 64:
-    tK : attend_ker_1_4 -> 3380 gflops
-    mlx: 3030 gflops
- 
- 16 x 16 x 1024 x 64:
-    tk : attend_ker_1_4 -> 3425 gflops
-    mlx: 3200 gflops
- 
- 16 x 16 x 1536 x 64:
-    tk : attend_ker_1_4 -> 3490 gflops
-    mlx: 3218 gflops
- 
- 16 x 16 x 2048 x 64:
-    tk : attend_ker_1_4 -> 3520 gflops
-    mlx: 3260 gflops
- 
- 16 x 16 x 2560 x 64:
-    tk : attend_ker_1_4 -> 3550 gflops
-    mlx: 3280 gflops
- 
- 
- ------------------------------------------------------------
- 16 x 16 x 512 x 64:
-    tK : attend_ker_gtr -> 3565 gflops
-    mlx: 3030 gflops
- 
- 16 x 16 x 1024 x 64:
-    tk : attend_ker_gtr -> 3699 gflops
-    mlx: 3200 gflops
- 
- 16 x 16 x 1536 x 64:
-    tk : attend_ker_gtr -> 3731 gflops
-    mlx: 3218 gflops
- 
- 16 x 16 x 2048 x 64:
-    tk : attend_ker_gtr -> 3746 gflops
-    mlx: 3260 gflops
- 
- 16 x 16 x 2560 x 64:
-    tk : attend_ker_gtr -> 3754 gflops
-    mlx: 3280 gflops
- 
- 
- ------------------------------------------------------------
- 16 x 16 x 512 x 64:
-    tK : 3565 gflops
-    mlx: 3030 gflops
-        1.1765676568
- 
- 16 x 16 x 1024 x 64:
-    tk : 3699 gflops
-    mlx: 3200 gflops
-        1.1559375
- 
- 16 x 16 x 1536 x 64:
-    tk : 3731 gflops
-    mlx: 3218 gflops
-        1.1594157862
- 
- 16 x 16 x 2048 x 64:
-    tk : 3746 gflops
-    mlx: 3260 gflops
- 
- 16 x 16 x 2560 x 64:
-    tk : 3754 gflops
-    mlx: 3280 gflops
-    
- */
-
 #endif

@@ -1,7 +1,5 @@
 import mlx.core as mx
 from tk import matmul_custom
-from tk import add_custom
-from tk import add_rt
 
 import time
 def calculate_flops(n, m, k):

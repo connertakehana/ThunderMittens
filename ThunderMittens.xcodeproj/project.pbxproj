@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		91C441472CF7B67300DE55ED /* MetalPerformanceShaders.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91C441462CF7B67300DE55ED /* MetalPerformanceShaders.framework */; };
 		91C441492CF7B67900DE55ED /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91C441482CF7B67900DE55ED /* Metal.framework */; };
-		91C4414B2CF7B68200DE55ED /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91C4414A2CF7B68200DE55ED /* Foundation.framework */; };
+		91C442F42CF7C2C800DE55ED /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91C4414A2CF7B68200DE55ED /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -118,7 +118,65 @@
 				kernels/add_rt/add_rt.cpp,
 				kernels/attn_fwd/attn_fwd.cpp,
 				kernels/bindings.cpp,
+				"kernels/build/lib.macosx-11.0-arm64-cpython-312/tk/libmlx_ext.dylib",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/CMakeFiles/_ext.dir/add_rt/add_rt.cpp.o",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/CMakeFiles/_ext.dir/add_rt/add_rt.cpp.o.d",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/CMakeFiles/_ext.dir/attn_fwd/attn_fwd.cpp.o",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/CMakeFiles/_ext.dir/attn_fwd/attn_fwd.cpp.o.d",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/CMakeFiles/_ext.dir/bindings.cpp.o",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/CMakeFiles/_ext.dir/bindings.cpp.o.d",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/CMakeFiles/_ext.dir/build.make",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/CMakeFiles/_ext.dir/compiler_depend.make",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/CMakeFiles/_ext.dir/depend.make",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/CMakeFiles/_ext.dir/flags.make",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/CMakeFiles/_ext.dir/matmul_custom/matmul_custom.cpp.o",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/CMakeFiles/_ext.dir/matmul_custom/matmul_custom.cpp.o.d",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/CMakeFiles/_ext.dir/progress.make",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/CMakeFiles/3.30.4/CompilerIdCXX/CMakeCXXCompilerId.cpp",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/CMakeFiles/3.30.4/CompilerIdCXX/CMakeCXXCompilerId.o",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/CMakeFiles/mlx_ext_metallib.dir/build.make",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/CMakeFiles/mlx_ext_metallib.dir/compiler_depend.make",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/CMakeFiles/mlx_ext_metallib.dir/progress.make",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/CMakeFiles/mlx_ext.dir/add_rt/add_rt.cpp.o",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/CMakeFiles/mlx_ext.dir/add_rt/add_rt.cpp.o.d",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/CMakeFiles/mlx_ext.dir/attn_fwd/attn_fwd.cpp.o",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/CMakeFiles/mlx_ext.dir/attn_fwd/attn_fwd.cpp.o.d",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/CMakeFiles/mlx_ext.dir/build.make",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/CMakeFiles/mlx_ext.dir/compiler_depend.make",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/CMakeFiles/mlx_ext.dir/depend.make",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/CMakeFiles/mlx_ext.dir/flags.make",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/CMakeFiles/mlx_ext.dir/matmul_custom/matmul_custom.cpp.o",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/CMakeFiles/mlx_ext.dir/matmul_custom/matmul_custom.cpp.o.d",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/CMakeFiles/mlx_ext.dir/progress.make",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/CMakeFiles/nanobind-static.dir/build.make",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/CMakeFiles/nanobind-static.dir/compiler_depend.make",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/CMakeFiles/nanobind-static.dir/depend.make",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/CMakeFiles/nanobind-static.dir/flags.make",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/CMakeFiles/nanobind-static.dir/progress.make",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/CMakeFiles/nanobind-static.dir/Users/connertakehana/miniforge3/lib/python3.12/site-packages/nanobind/src/common.cpp.o",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/CMakeFiles/nanobind-static.dir/Users/connertakehana/miniforge3/lib/python3.12/site-packages/nanobind/src/common.cpp.o.d",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/CMakeFiles/nanobind-static.dir/Users/connertakehana/miniforge3/lib/python3.12/site-packages/nanobind/src/error.cpp.o",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/CMakeFiles/nanobind-static.dir/Users/connertakehana/miniforge3/lib/python3.12/site-packages/nanobind/src/error.cpp.o.d",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/CMakeFiles/nanobind-static.dir/Users/connertakehana/miniforge3/lib/python3.12/site-packages/nanobind/src/implicit.cpp.o",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/CMakeFiles/nanobind-static.dir/Users/connertakehana/miniforge3/lib/python3.12/site-packages/nanobind/src/implicit.cpp.o.d",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/CMakeFiles/nanobind-static.dir/Users/connertakehana/miniforge3/lib/python3.12/site-packages/nanobind/src/nb_enum.cpp.o",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/CMakeFiles/nanobind-static.dir/Users/connertakehana/miniforge3/lib/python3.12/site-packages/nanobind/src/nb_enum.cpp.o.d",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/CMakeFiles/nanobind-static.dir/Users/connertakehana/miniforge3/lib/python3.12/site-packages/nanobind/src/nb_func.cpp.o",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/CMakeFiles/nanobind-static.dir/Users/connertakehana/miniforge3/lib/python3.12/site-packages/nanobind/src/nb_func.cpp.o.d",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/CMakeFiles/nanobind-static.dir/Users/connertakehana/miniforge3/lib/python3.12/site-packages/nanobind/src/nb_internals.cpp.o",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/CMakeFiles/nanobind-static.dir/Users/connertakehana/miniforge3/lib/python3.12/site-packages/nanobind/src/nb_internals.cpp.o.d",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/CMakeFiles/nanobind-static.dir/Users/connertakehana/miniforge3/lib/python3.12/site-packages/nanobind/src/nb_ndarray.cpp.o",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/CMakeFiles/nanobind-static.dir/Users/connertakehana/miniforge3/lib/python3.12/site-packages/nanobind/src/nb_ndarray.cpp.o.d",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/CMakeFiles/nanobind-static.dir/Users/connertakehana/miniforge3/lib/python3.12/site-packages/nanobind/src/nb_static_property.cpp.o",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/CMakeFiles/nanobind-static.dir/Users/connertakehana/miniforge3/lib/python3.12/site-packages/nanobind/src/nb_static_property.cpp.o.d",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/CMakeFiles/nanobind-static.dir/Users/connertakehana/miniforge3/lib/python3.12/site-packages/nanobind/src/nb_type.cpp.o",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/CMakeFiles/nanobind-static.dir/Users/connertakehana/miniforge3/lib/python3.12/site-packages/nanobind/src/nb_type.cpp.o.d",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/CMakeFiles/nanobind-static.dir/Users/connertakehana/miniforge3/lib/python3.12/site-packages/nanobind/src/trampoline.cpp.o",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/CMakeFiles/nanobind-static.dir/Users/connertakehana/miniforge3/lib/python3.12/site-packages/nanobind/src/trampoline.cpp.o.d",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/libnanobind-static.a",
+				"kernels/build/temp.macosx-11.0-arm64-cpython-312/tk._ext/Makefile",
 				kernels/matmul_custom/matmul_custom.cpp,
+				kernels/tk/libmlx_ext.dylib,
 				mlx/benchmarks/cpp/autograd.cpp,
 				mlx/benchmarks/cpp/compare_devices.cpp,
 				mlx/benchmarks/cpp/irregular_strides.cpp,
@@ -318,7 +376,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				91C4414B2CF7B68200DE55ED /* Foundation.framework in Frameworks */,
+				91C442F42CF7C2C800DE55ED /* Foundation.framework in Frameworks */,
 				91C441492CF7B67900DE55ED /* Metal.framework in Frameworks */,
 				91C441472CF7B67300DE55ED /* MetalPerformanceShaders.framework in Frameworks */,
 			);
@@ -542,6 +600,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				HEADER_SEARCH_PATHS = "";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ThunderMittens/kernels/build/lib.macosx-11.0-arm64-cpython-312/tk",
@@ -558,6 +617,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				HEADER_SEARCH_PATHS = "";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ThunderMittens/kernels/build/lib.macosx-11.0-arm64-cpython-312/tk",

@@ -1,7 +1,7 @@
 //#define ENABLE_TESTS
 #define TEST_INTENSITY 1
 
-#define ENABLE_TESTS
+//#define ENABLE_TESTS
 
 #ifdef ENABLE_TESTS
 #define TEST_ALL

@@ -1,6 +1,7 @@
 ThunderMittens/tests/unit/outputs/
 
 ThunderMittens/kernels/tk/
+*.txt
 
 
 # MLX provided:
