@@ -34,7 +34,7 @@ For using ThunderKittens kernels within MLX in Python:
    ```
 
 3. Navigate to ThunderMittens/kernels directory
-4. Install kernel requirements:
+4. Install requirements:
    ```bash
    pip install -r requirements.txt
    ```
@@ -43,13 +43,6 @@ For using ThunderKittens kernels within MLX in Python:
    ```bash
    python setup.py build_ext -j8 --inplace
    ```
-
-## Dependencies
-
-- ThunderKittens
-- MLX
-- Apple Metal Framework
-- Python development tools
 
 ## Support
 
