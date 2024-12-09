@@ -3,7 +3,7 @@
 
 ## Overview
 
-ThunderMittens is an Apple Metal Shading Language (MSL) port for ThunderKittens, providing a robust framework for GPU-accelerated computing on Apple Silicon.
+ThunderMittens is an Apple Metal Shading Language (MSL) port for [ThunderKittens](github.com/HazyResearch/ThunderKittens/).
 
 ## Project Structure
 
