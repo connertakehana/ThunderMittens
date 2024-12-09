@@ -1,4 +1,5 @@
 # ThunderMittens
+![ThunderMittens](https://github.com/user-attachments/assets/f539ee38-e4fa-4908-ac8a-3c1b0eb999bd)
 
 ## Overview
 
